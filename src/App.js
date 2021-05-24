@@ -1,25 +1,239 @@
-import logo from './logo.svg';
-import './App.css';
+// npm install firebase
+// import firebaseApp from "./firebase/firebaseConfig";
+import React, { Component } from "react";
+import { BrowserRouter as Router,Redirect,Route,Switch,} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import firebaseApp from "./firebase/firebaseConfig";
+
+//--------------------------components----------------------------------
+import Skin from "./Components/Skins/skin11.jsx";
+import Navbar from "./Components/NavBar/Navbar.jsx";
+import SignIn from "./Components/SignIn/SignIn";
+import LandingPage from "./Components/LandingPage/LandingPage";
+import About from "./Components/About/About";
+import Templates from "./Components/Templates/Templates";
+import Profile from "./Components/Profile/Profile";
+import SignUp from "./Components/SignUp/Signup";
+import Contact from "./Components/Contact/Contact";
+import Education from "./Components/Education/Education";
+import Finalize from "./Components/Finalize/Finalize";
+import MyResume from "./Components/MyResumes/MyResume";
+
+
+
+
+// app component start here --------------------------------------------------------------------------------------------------------------------------
+
+class App extends Component {
+  state = {
+    isAuth: false,
+    user: null,
+    selectResumeId: null,
+    resumeDetails : null
+  };
+
+
+  //------------------------------------------initial state-----------------------------------------------
+
+  setResumeId = (id) => {
+    this.setState({
+      selectResumeId: id,
+    });
+  };
+
+  //----------------------------------------logout ------------------------------------------------
+
+  logout = () => {
+    firebaseApp
+      .auth()
+      .signOut()
+      .then((obj) => {
+        console.log("Signed Out !!!!");
+        this.setState({
+          isAuth: false,
+          user: null,
+        });
+      });
+  };
+
+  //-----------------------------------------login ---------------------------------------------------------
+
+  login = (id, pw) => {
+    // log in to firebase !!!!
+    firebaseApp
+      .auth()
+      .signInWithEmailAndPassword(id, pw)
+      .then((obj) => {
+        console.log("logged in");
+        console.log(obj.user);
+      });
+  };
+
+  //------------------------------------------------------------------------------------------------------
+  componentDidMount() {
+    // event attached to auth state changed
+    firebaseApp.auth().onAuthStateChanged(async (user) => {
+      console.log("Inside auth state changed !!");
+      let selectResumeId = null;
+      // check if logged in ??
+      if (user) {
+        // get selected resumeId
+        let doc =  await firebaseApp
+          .firestore()
+          .collection("users")
+          .doc(user.uid)
+          .get();
+          console.log(doc);
+        let resumes = doc.data()["Resumes"];
+        for (let i = 0; i < resumes.length; i++) {
+          if (resumes[i].isSelected) {
+            selectResumeId = resumes[i].resumeId;
+            break;
+          }
+        }
+      }
+   
+
+
+      
+      // get resume details
+      let resumeInfo = firebaseApp.firestore().collection("resumes").doc(String(selectResumeId)).get();
+      let resumeDetails = resumeInfo.data();
+
+      this.setState({
+        isAuth: user ? true : false,
+        user: user ? user.uid : null,
+        selectResumeId: selectResumeId,
+        resumeDetails : resumeDetails
+      });
+    });
+  }
+  
+
+  render() {
+    let { isAuth } = this.state;
+    return (
+      <Router>
+        <div className="App">
+          <Navbar isAuth={isAuth} logout={this.logout}></Navbar>
+          <Switch>
+            <Route path="/" exact>
+              <LandingPage isAuth={isAuth}></LandingPage>
+            </Route>
+
+            <Route path="/about" exact>
+              <About></About>
+              {/* <Skin></Skin> */}
+            </Route>
+
+            <Route
+              path="/contact"
+              exact
+              render={(props) =>
+                this.state.isAuth ? (
+                  <Contact
+                    {...props}
+                    uid={this.state.user}
+                    // resumeId={this.state.selectResumeId}
+                  ></Contact>
+                ) : (
+                  <Redirect to="/signin"></Redirect>
+                )
+              }
+            ></Route>
+            <Route
+              path="/education"
+              exact
+              render={(props) =>
+                this.state.isAuth ? (
+                  <Education
+                    {...props}
+                    uid={this.state.user}
+                    // resumeId={this.state.selectResumeId}
+                  ></Education>
+                ) : (
+                  <Redirect to="/signin"></Redirect>
+                )
+              }
+            ></Route>
+            <Route
+              path="/finalize"
+              exact
+              render={(props) =>
+                this.state.isAuth ? (
+                  <Finalize
+                    {...props}
+                    uid={this.state.user}
+                    // resumeId={this.state.selectResumeId}
+                  ></Finalize>
+                ) : (
+                  <Redirect to="/signin"></Redirect>
+                )
+              }
+            ></Route>
+            {/* <Route path="/templates" exact component={Templates}></Route> */}
+            {/* {isAuth ? <Templates> </Templates> : <Redirect to="/login"></Redirect>  } */}
+
+            <Route
+              path="/myresume"
+              exact
+              render={(props) =>
+                this.state.isAuth ? (
+                  <MyResume
+                    {...props}
+                    uid={this.state.user}
+                    resumeId={this.state.selectResumeId}
+                    setResumeId = {this.setResumeId}
+                  ></MyResume>
+                ) : (
+                  <Redirect to="/signin"></Redirect>
+                )
+              }
+            ></Route>
+
+
+            <Route
+              path="/templates"
+              exact
+              render={(props) =>
+                this.state.isAuth ? (
+                  <Templates
+                    {...props}
+                    uid={this.state.user}
+                    resumeId={this.state.selectResumeId}
+                    setResumeId={this.setResumeId}
+                  ></Templates>
+                ) : (
+                  <Redirect to="/signin"></Redirect>
+                )
+              }
+            ></Route>
+
+            <Route path="/profile" exact>
+              {isAuth ? <Profile></Profile> : <Redirect to="/login"></Redirect>}
+            </Route>
+
+            <Route path="/signup">
+              {isAuth ? (
+                <Redirect to="/"></Redirect>
+              ) : (
+                <SignUp signup={this.signup}></SignUp>
+              )}
+            </Route>
+
+            <Route path="/signin" exact>
+              {isAuth ? (
+                <Redirect to="/"></Redirect>
+              ) : (
+                <SignIn login={this.login}></SignIn>
+              )}
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
