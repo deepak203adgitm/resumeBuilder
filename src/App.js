@@ -29,8 +29,8 @@ class App extends Component {
   state = {
     isAuth: false,
     user: null,
-    selectResumeId: null,
-    resumeDetails : null
+   // selectResumeId: null,
+    //resumeDetails : null
   };
 
 
@@ -65,10 +65,42 @@ class App extends Component {
       .auth()
       .signInWithEmailAndPassword(id, pw)
       .then((obj) => {
+       // isauth: true;
         console.log("logged in");
         console.log(obj.user);
       });
   };
+
+
+
+  signup = (id, pw) => {
+    // log in to firebase !!!!
+   firebaseApp
+      .auth().createUserWithEmailAndPassword(id,pw).then(obj=>{
+        console.log(obj);
+
+        let uid = obj.user.id;
+        let email = obj.user.email;
+        let name = "deepak";
+
+     let userpromise =  firebaseApp
+         .firestore()
+          .collection("users")
+          .doc(uid)
+          .set({
+            Name : name,
+            Email : email
+          })
+          return userpromise;
+        
+        }).then(obj=>{
+            console.log('obj');
+          })
+
+    //  });
+      
+  };
+
 
   //------------------------------------------------------------------------------------------------------
   componentDidMount() {
@@ -79,34 +111,34 @@ class App extends Component {
       // check if logged in ??
       if (user) {
         // get selected resumeId
-        let doc =  await firebaseApp
-          .firestore()
-          .collection("users")
-          .doc(user.uid)
-          .get();
-          console.log(doc);
-        let resumes = doc.data()["Resumes"];
-        for (let i = 0; i < resumes.length; i++) {
-          if (resumes[i].isSelected) {
-            selectResumeId = resumes[i].resumeId;
-            break;
-          }
-        }
-      }
+      //  let doc =  await firebaseApp
+        //  .firestore()
+          //.collection("users")
+          //.doc(user.uid)
+          //.get();
+          //console.log(doc);
+        //let resumes = doc.data()["Resumes"];
+        //for (let i = 0; i < resumes.length; i++) {
+          //if (resumes[i].isSelected) {
+            //selectResumeId = resumes[i].resumeId;
+            //break;
+          //}
+        //}
+      //}
    
 
 
       
       // get resume details
-      let resumeInfo = firebaseApp.firestore().collection("resumes").doc(String(selectResumeId)).get();
-      let resumeDetails = resumeInfo.data();
+   //   let resumeInfo = firebaseApp.firestore().collection("resumes").doc(SelectResumeId).get();
+     // let resumeDetails = resumeInfo.data();
 
       this.setState({
         isAuth: user ? true : false,
         user: user ? user.uid : null,
-        selectResumeId: selectResumeId,
-        resumeDetails : resumeDetails
-      });
+       // selectResumeId: selectResumeId,
+        //resumeDetails : resumeDetails
+      });}
     });
   }
   
@@ -183,8 +215,8 @@ class App extends Component {
                   <MyResume
                     {...props}
                     uid={this.state.user}
-                    resumeId={this.state.selectResumeId}
-                    setResumeId = {this.setResumeId}
+                  //  resumeId={this.state.selectResumeId}
+                   // setResumeId = {this.setResumeId}
                   ></MyResume>
                 ) : (
                   <Redirect to="/signin"></Redirect>
@@ -201,8 +233,8 @@ class App extends Component {
                   <Templates
                     {...props}
                     uid={this.state.user}
-                    resumeId={this.state.selectResumeId}
-                    setResumeId={this.setResumeId}
+                //    resumeId={this.state.selectResumeId}
+                  //  setResumeId={this.setResumeId}
                   ></Templates>
                 ) : (
                   <Redirect to="/signin"></Redirect>
