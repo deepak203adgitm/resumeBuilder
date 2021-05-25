@@ -1,0 +1,35 @@
+.navbar {
+  height: 80px;
+  
+  display: flex;
+  padding-top: 57px;
+  justify-content: center;
+
+}
+
+.logo {
+  height: 90%;
+}
+
+.logo img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.navlinks {
+  /* background:lightcoral; */
+  width: 40%;
+}
+
+.navlinks ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.navlinks ul li {
+  list-style: none;
+}
+
+.navlinks ul li a {
+  text-decoration: none;
+}

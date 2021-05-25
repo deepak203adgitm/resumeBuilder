@@ -1,0 +1,54 @@
+.landing {
+  height: 250px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 100px;
+  opacity: 0.5;
+}
+
+#header {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0.6, 0)),
+    url(https://wallpaperspost.com/wp-content/uploads/black-computer-keyboard-on-black-table.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.user-box {
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.user-box-button {
+  width: 250px;
+  margin-left: 30%;
+  padding-top: 34%;
+}
+.user-box h1 {
+  color: #fff;
+  font-weight: bold;
+  margin: 10px;
+}
+.user-box p {
+  color: #fff;
+}
+
+.landing-content {
+}
+
+.landing-content h1 {
+  line-height: 80px;
+  text-align: center;
+}
+
+.landing-content p {
+  line-height: 30px;
+  text-align: center;
+}
