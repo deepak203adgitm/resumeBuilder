@@ -27,7 +27,7 @@ class SignUp extends Component {
       firebaseApp.auth().createUserWithEmailAndPassword(id , pw)
       .then( userInfo =>{
           console.log("Inside then");
-        //   console.log(userInfo);
+          console.log(userInfo);
         let fname = this.state.fname;
         let lname = this.state.lname;
         let uid = userInfo.user.uid;
@@ -38,6 +38,7 @@ class SignUp extends Component {
             "Password":pw ,
             "Uid" : uid ,
             "Resumes" : []
+
         })
         return userCreatedPromise;
       })

@@ -73,33 +73,7 @@ class App extends Component {
 
 
 
-  signup = (id, pw) => {
-    // log in to firebase !!!!
-   firebaseApp
-      .auth().createUserWithEmailAndPassword(id,pw).then(obj=>{
-        console.log(obj);
-
-        let uid = obj.user.id;
-        let email = obj.user.email;
-        let name = "deepak";
-
-     let userpromise =  firebaseApp
-         .firestore()
-          .collection("users")
-          .doc(uid)
-          .set({
-            Name : name,
-            Email : email
-          })
-          return userpromise;
-        
-        }).then(obj=>{
-            console.log('obj');
-          })
-
-    //  });
-      
-  };
+  
 
 
   //------------------------------------------------------------------------------------------------------
