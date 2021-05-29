@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import "./SignIn.css";
+import{Card,Buto} from 'react-bootstrap';
+
+
+
 
 class SignIn extends Component {
   state = {
@@ -15,21 +20,43 @@ class SignIn extends Component {
     })
   }
 
+ 
+
   render() {
     return (
-      <div className="login">
+     
+      <div className = "full">
+      <div className = "Card" >
+
+        <div className ="title">   <b>SIGN IN</b> </div>
+
+        <div className = "leftCard" >
+
+
+  
+        <div >
+         
+          <input type="text" id="id" value={this.state.id} placeholder =" ID" onChange={ (e) => {this.onChangeHandler(e)}  }/>
+        </div>
+
         <div>
-          <h2>Id</h2>
-          <input type="text" id="id" value={this.state.id} onChange={ (e) => {this.onChangeHandler(e)}  }/>
+          
+          <input type="text" id="pw" value = {this.state.pw}  placeholder ="Password"  onChange={ (e) =>{this.onChangeHandler(e)} }/>
         </div>
+
         <div>
-          <h2>Password</h2>
-          <input type="text" id="pw" value = {this.state.pw} onChange={ (e) =>{this.onChangeHandler(e)} }/>
+           <button  className="btn" onClick={ () => { this.props.login(this.state.id , this.state.pw) }  }>Sign In</button> 
         </div>
-        <div className="signin-button">
-           <button onClick={ () => { this.props.login(this.state.id , this.state.pw) }  }>Sign In</button> 
         </div>
+        </div>
+
+        
+
+
+     
       </div>
+     
+     
     );
   }
 }

@@ -1,10 +1,31 @@
 .navbar {
-  height: 80px;
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 100px;
   display: flex;
-  padding-top: 57px;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  
+}
 
+.navbar ul {
+  position: relative;
+  display: flex;
+}
+
+.navbar a {
+  position: relative;
+  display: inline-block;
+  margin: 0 15px;
+  color: rgb(0, 0, 0);
 }
 
 .logo {
