@@ -1,15 +1,17 @@
 // npm install firebase
 // import firebaseApp from "./firebase/firebaseConfig";
 import React, { Component } from "react";
-import { BrowserRouter as Router,Redirect,Route,Switch,} from "react-router-dom";
-
-
 import firebaseApp from "./firebase/firebaseConfig";
-
-//--------------------------components----------------------------------
-import Skin from "./Components/Skins/skin11.jsx";
+import Skin from "./Components/Skins/skin2.jsx";
 import Navbar from "./Components/NavBar/Navbar.jsx";
 import SignIn from "./Components/SignIn/SignIn";
+
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import LandingPage from "./Components/LandingPage/LandingPage";
 import About from "./Components/About/About";
 import Templates from "./Components/Templates/Templates";
@@ -20,29 +22,19 @@ import Education from "./Components/Education/Education";
 import Finalize from "./Components/Finalize/Finalize";
 import MyResume from "./Components/MyResumes/MyResume";
 
-
-
-
-// app component start here --------------------------------------------------------------------------------------------------------------------------
-
 class App extends Component {
   state = {
     isAuth: false,
     user: null,
-   // selectResumeId: null,
-    //resumeDetails : null
+    // selectResumeId: null,
+    // resumeDetails : null
   };
-
-
-  //------------------------------------------initial state-----------------------------------------------
 
   setResumeId = (id) => {
     this.setState({
       selectResumeId: id,
     });
   };
-
-  //----------------------------------------logout ------------------------------------------------
 
   logout = () => {
     firebaseApp
@@ -57,65 +49,50 @@ class App extends Component {
       });
   };
 
-  //-----------------------------------------login ---------------------------------------------------------
-
   login = (id, pw) => {
     // log in to firebase !!!!
     firebaseApp
       .auth()
       .signInWithEmailAndPassword(id, pw)
       .then((obj) => {
-       // isauth: true;
         console.log("logged in");
         console.log(obj.user);
       });
   };
 
-
-
-  
-
-
-  //------------------------------------------------------------------------------------------------------
   componentDidMount() {
     // event attached to auth state changed
     firebaseApp.auth().onAuthStateChanged(async (user) => {
       console.log("Inside auth state changed !!");
       let selectResumeId = null;
       // check if logged in ??
-      if (user) {
-        // get selected resumeId
-      //  let doc =  await firebaseApp
-        //  .firestore()
-          //.collection("users")
-          //.doc(user.uid)
-          //.get();
-          //console.log(doc);
-        //let resumes = doc.data()["Resumes"];
-        //for (let i = 0; i < resumes.length; i++) {
-          //if (resumes[i].isSelected) {
-            //selectResumeId = resumes[i].resumeId;
-            //break;
-          //}
-        //}
-      //}
-   
-
-
-      
-      // get resume details
-   //   let resumeInfo = firebaseApp.firestore().collection("resumes").doc(SelectResumeId).get();
-     // let resumeDetails = resumeInfo.data();
+      // if (user) {
+      //   // get selected resumeId
+      //   let doc = await firebaseApp
+      //     .firestore()
+      //     .collection("users")
+      //     .doc(user.uid)
+      //     .get();
+      //   let resumes = doc.data()["Resumes"];
+      //   for (let i = 0; i < resumes.length; i++) {
+      //     if (resumes[i].isSelected) {
+      //       selectResumeId = resumes[i].resumeId;
+      //       break;
+      //     }
+      //   }
+      // }
+      // // get resume details
+      // let resumeInfo = await firebaseApp.firestore().collection("resumes").doc(selectResumeId).get();
+      // let resumeDetails = resumeInfo.data();
 
       this.setState({
         isAuth: user ? true : false,
         user: user ? user.uid : null,
-       // selectResumeId: selectResumeId,
-        //resumeDetails : resumeDetails
-      });}
+        // selectResumeId: selectResumeId,
+        // resumeDetails : resumeDetails
+      });
     });
   }
-  
 
   render() {
     let { isAuth } = this.state;
@@ -189,8 +166,8 @@ class App extends Component {
                   <MyResume
                     {...props}
                     uid={this.state.user}
-                  //  resumeId={this.state.selectResumeId}
-                   // setResumeId = {this.setResumeId}
+                    resumeId={this.state.selectResumeId}
+                    setResumeId = {this.setResumeId}
                   ></MyResume>
                 ) : (
                   <Redirect to="/signin"></Redirect>
@@ -207,8 +184,8 @@ class App extends Component {
                   <Templates
                     {...props}
                     uid={this.state.user}
-                //    resumeId={this.state.selectResumeId}
-                  //  setResumeId={this.setResumeId}
+                    resumeId={this.state.selectResumeId}
+                    setResumeId={this.setResumeId}
                   ></Templates>
                 ) : (
                   <Redirect to="/signin"></Redirect>

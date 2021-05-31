@@ -1,0 +1,38 @@
+.Card-signup {
+  height: 12%;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    transition: 0.3s;
+    width: 41%;
+    background: white;
+    border-radius: 12px;
+    /* padding: 7%; */
+    margin-left: 19%;
+    margin-top: 12%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.Card-signup:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.s-btn {
+  width: 42%;
+  height: 40Px;
+  border: 1px solid #9b59b6;
+  background: none;
+  color: #9b59b6;
+  font-size: 88%;
+  border-radius: 25px;
+  outline: none;
+  transition: 0.5s background;
+  margin-left: 18%;
+  margin-top: 1%;
+  margin-bottom: 8%;
+}
+.s-btn :hover {
+  background-color: #9b59b6;
+}
+
+.title {
+}

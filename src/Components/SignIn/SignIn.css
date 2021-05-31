@@ -2,43 +2,38 @@ input[type="text"],
 input[type="password"] {
   border-radius: 15px;
   width: 90%;
-  padding: 18px 20px;
+  padding: 4%;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  margin: 30px;
+  margin: 5%;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin-top: 200px;
-  margin-left: 10%;
-  margin-right: 10%;
-  /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPdom7Qy8DCRRoRt-ao94zNSDLDdxZ1xI19Q&usqp=CAU); */
-  height: 80vh;
-  background-size: cover;
-  background-position: center;
-}
+
 
 .Card {
-  height: 538px;
+  height: 54%;
   width: 300;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
   transition: 0.3s;
-  width: 534px;
+  width: 45%;
   background: white;
   border-radius: 12px;
-  padding: 96px;
- 
+  padding: 4%;
+  margin-left: 20%;
+  margin-top: 14%;
 }
+  
+ 
+
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 
-  .signin-button{
-    width: 282px;
-    height: 50px;
+  .sign-in-btn{
+    width: 63%;
+    height: 40px;
     border: 1px solid #9b59b6;
     background: none;
     color: #9b59b6;
@@ -46,10 +41,14 @@ body {
     border-radius: 25px;
     outline: none;
     transition: 0.5s background;
-    margin-left: 46px;
-    margin-top: 16px;
+    margin-left: 16%;
+    margin-top: 4%
 
     
+  }
+  .sign-in-btn :hover{
+    background-color: #9b59b6;
+
   }
 
   .title{

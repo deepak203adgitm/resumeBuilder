@@ -27,41 +27,30 @@ class LandingPage extends Component {
                 </Link>}
             </div>
 
-            <div className ="imageLanding">
-                <img src =" ./images/bgpic.png"/> 
-            </div>
+
+
+           
+
+            <div className = "content-section">
+                
+
+                <div classname ="left-section">
+                    <h1>Zety. The Best Resume Builder Online.</h1>
+                Build a resume that gets you hired—
+                </div>
+
+                <div classname ="right-section">
+                Try it yourself. Just pick one of 20+ professional resume templates, fill in the blanks, and download. The resume wizard will guide you every step of the way.
+                </div>
+                 </div>
+
+
 
 
                 
             
-                
             
             
-            <div className="benifit" >
-
-            <div className="benifit-heading">
-                <h1>Benefits of using a resume builder</h1>
-            </div> 
-
-            <div  className ="benifit-section">
-                
-                   
-
-            <div className ="benifit-left-section">
-            <h1>A Resume Layout That Stands Out</h1>
-                    <p>A creative, professional layout can grab a recruiter's attention. Our resume layout optimizer makes sure all your content is aligned and organized so your resume looks like a work of art.</p>
-
-              
-            </div>
-            
-            <div className ="benifit-right-section">
-            <h1>A Resume Layout That Stands Out</h1>
-                    <p>A creative, professional layout can grab a recruiter's attention. Our resume layout optimizer makes sure all your content is aligned and organized so your resume looks like a work of art.</p>
-                
-              
-            </div>
-            </div>
-            </div>
        
 
 

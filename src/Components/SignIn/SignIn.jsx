@@ -25,10 +25,9 @@ class SignIn extends Component {
   render() {
     return (
      
-      <div className = "full">
       <div className = "Card" >
 
-        <div className ="title">   <b>SIGN IN</b> </div>
+   
 
         <div className = "leftCard" >
 
@@ -45,7 +44,7 @@ class SignIn extends Component {
         </div>
 
         <div>
-           <button  className="btn" onClick={ () => { this.props.login(this.state.id , this.state.pw) }  }>Sign In</button> 
+           <button  className="sign-in-btn" onClick={ () => { this.props.login(this.state.id , this.state.pw) }  }>Sign In</button> 
         </div>
         </div>
         </div>
@@ -54,7 +53,6 @@ class SignIn extends Component {
 
 
      
-      </div>
      
      
     );

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import firebaseApp from "../../firebase/firebaseConfig";
 import { contactCodes } from "../../util/codes";
 import Skin1 from "../Skins/skin1";
+import Skin2 from "../Skins/skin2";
 import "./Contact.css";
 
 class Contact extends Component {

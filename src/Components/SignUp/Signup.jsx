@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebaseApp from "../../firebase/firebaseConfig";
+import "./SignUp.css";
 
 
 class SignUp extends Component {
@@ -58,12 +59,14 @@ class SignUp extends Component {
 
   render() {
     return (
+      <div className ="Card-signup">
       <div className="signup">
         <div>
-          <h2>First Name</h2>
+          
           <input
             type="text"
             id="fname"
+            placeholder="first "
             value={this.state.fname}
             onChange={(e) => {
               this.onChangeHandler(e);
@@ -71,10 +74,11 @@ class SignUp extends Component {
           />
         </div>  
         <div>
-          <h2>Last Name</h2>
+          
           <input
             type="text"
             id="lname"
+            placeholder ="lastname"
             value={this.state.lname}
             onChange={(e) => {
               this.onChangeHandler(e);
@@ -82,10 +86,11 @@ class SignUp extends Component {
           />
         </div>  
         <div>
-          <h2>Id</h2>
+          
           <input
             type="text"
             id="id"
+            placeholder ="id"
             value={this.state.id}
             onChange={(e) => {
               this.onChangeHandler(e);
@@ -93,19 +98,21 @@ class SignUp extends Component {
           />
         </div>
         <div>
-          <h2>Password</h2>
+         
           <input
             type="text"
             id="pw"
+            placeholder="password"
             value={this.state.pw}
             onChange={(e) => {
               this.onChangeHandler(e);
             }}
           />
         </div>
-           <button className="btn" onClick={ this.signUpHandler }>Sign Up</button> 
+           <button className="s-btn" onClick={ this.signUpHandler }>Sign Up</button> 
 
            <p>{this.state.error}</p>
+      </div>
       </div>
     );
   }
